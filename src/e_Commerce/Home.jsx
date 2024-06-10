@@ -6,7 +6,7 @@ import FeatureProduct from './eComComponents/FeatureProduct';
 
 function Home() {
   const data={
-    'name':'Trend Mart',
+    'name':'Trend Mart – Your Hub for the Latest Electronics!',
   };
   return (
   <>

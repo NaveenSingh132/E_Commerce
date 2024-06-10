@@ -1,10 +1,11 @@
-import heroImg from './images/hero.jpg';
+import heroImg from './images/360_F_364410756_Ev3WoDfNyxO9c9n4tYIsU5YBQWAP3UF8.jpg';
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { Button } from "./Button";
 
-const HeroSection = ({ myData }) => {
+const HeroSection = ({ myData}) => {
   const { name } = myData;
+  
 
   return (
     <Wrapper>
@@ -14,11 +15,11 @@ const HeroSection = ({ myData }) => {
             <p className="intro-data">Welcome to </p>
             <h1> {name} </h1>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias
-              atque temporibus veniam doloribus libero ad error omnis voluptates
-              animi! Suscipit sapiente.
+            Whether you’re a tech enthusiast or just looking for the latest electronics, 
+            Trend Mart has something for everyone. Dive into our collection and discover
+             the future today.
             </p>
-            <NavLink>
+            <NavLink to="/products">
               <Button>show now</Button>
             </NavLink>
           </div>
@@ -67,6 +68,7 @@ const Wrapper = styled.section`
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 5px 20px 5px;
   }
   figure {
     position: relative;
@@ -80,6 +82,7 @@ const Wrapper = styled.section`
       left: 50%;
       top: -5rem;
       z-index: -1;
+      border-radius: 5px 20px 5px;
     }
   }
   .img-style {
