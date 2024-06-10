@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/static/css/main.f855e6bc.css",
-    "main.js": "/static/js/main.d7ede3ed.js",
-    "static/js/787.774594b4.chunk.js": "/static/js/787.774594b4.chunk.js",
-    "static/media/404-error-3702359-3119148.webp": "/static/media/404-error-3702359-3119148.098d5b4e424ac525b983.webp",
-    "static/media/360_F_364410756_Ev3WoDfNyxO9c9n4tYIsU5YBQWAP3UF8.jpg": "/static/media/360_F_364410756_Ev3WoDfNyxO9c9n4tYIsU5YBQWAP3UF8.08701c36599953d2fa42.jpg",
-    "static/media/WhatsApp Image 2024-06-08 at 13.28.57.jpeg": "/static/media/WhatsApp Image 2024-06-08 at 13.28.57.6bcc48c30da5c06fb54a.jpeg",
-    "index.html": "/index.html",
-    "main.f855e6bc.css.map": "/static/css/main.f855e6bc.css.map",
-    "main.d7ede3ed.js.map": "/static/js/main.d7ede3ed.js.map",
-    "787.774594b4.chunk.js.map": "/static/js/787.774594b4.chunk.js.map"
+    "main.css": "/E_Commerce/static/css/main.f855e6bc.css",
+    "main.js": "/E_Commerce/static/js/main.4e8ee9bd.js",
+    "static/js/787.774594b4.chunk.js": "/E_Commerce/static/js/787.774594b4.chunk.js",
+    "static/media/404-error-3702359-3119148.webp": "/E_Commerce/static/media/404-error-3702359-3119148.098d5b4e424ac525b983.webp",
+    "static/media/360_F_364410756_Ev3WoDfNyxO9c9n4tYIsU5YBQWAP3UF8.jpg": "/E_Commerce/static/media/360_F_364410756_Ev3WoDfNyxO9c9n4tYIsU5YBQWAP3UF8.08701c36599953d2fa42.jpg",
+    "static/media/WhatsApp Image 2024-06-08 at 13.28.57.jpeg": "/E_Commerce/static/media/WhatsApp Image 2024-06-08 at 13.28.57.6bcc48c30da5c06fb54a.jpeg",
+    "index.html": "/E_Commerce/index.html",
+    "main.f855e6bc.css.map": "/E_Commerce/static/css/main.f855e6bc.css.map",
+    "main.4e8ee9bd.js.map": "/E_Commerce/static/js/main.4e8ee9bd.js.map",
+    "787.774594b4.chunk.js.map": "/E_Commerce/static/js/787.774594b4.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f855e6bc.css",
-    "static/js/main.d7ede3ed.js"
+    "static/js/main.4e8ee9bd.js"
   ]
 }
