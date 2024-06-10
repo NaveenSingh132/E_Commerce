@@ -1,69 +1,109 @@
-import { createContext, useContext, useEffect, useReducer } from "react";
-import reducer from "../reducer/CartReducer";
+const cartReducer = (state, action) => {
+  switch (action.type) {
+    case "ADD_TO_CART": {
+      let { id, color, amount, product } = action.payload;
+      let existingProduct = state.cart.find((curItem) => curItem.id === id + color);
 
-const CartContext = createContext();
+      if (existingProduct) {
+        let updatedProduct = state.cart.map((curElem) => {
+          if (curElem.id === id + color) {
+            let newAmount = curElem.amount + amount;
+            if (newAmount >= curElem.max) {
+              newAmount = curElem.max;
+            }
+            return { ...curElem, amount: newAmount };
+          } else {
+            return curElem;
+          }
+        });
+        return { ...state, cart: updatedProduct };
+      } else {
+        let cartProduct = {
+          id: id + color,
+          name: product.name,
+          color,
+          amount,
+          image: product.image[0].url,
+          price: product.price,
+          max: product.stock,
+        };
+        return { ...state, cart: [...state.cart, cartProduct] };
+      }
+    }
 
-const getLocalCartData = () =>{
-  let newCartData = localStorage.getItem("cartData");
-  if(newCartData === []){
-    return [];
-  } else{
-    return JSON.parse(newCartData);
+    case "SET_DECREMENT": {
+      let updatedProduct = state.cart.map((curElem) => {
+        if (curElem.id === action.payload) {
+          let decAmount = curElem.amount - 1;
+          if (decAmount <= 1) {
+            decAmount = 1;
+          }
+          return { ...curElem, amount: decAmount };
+        } else {
+          return curElem;
+        }
+      });
+      return { ...state, cart: updatedProduct };
+    }
+
+    case "SET_INCREMENT": {
+      let updatedProduct = state.cart.map((curElem) => {
+        if (curElem.id === action.payload) {
+          let incAmount = curElem.amount + 1;
+          if (incAmount >= curElem.max) {
+            incAmount = curElem.max;
+          }
+          return { ...curElem, amount: incAmount };
+        } else {
+          return curElem;
+        }
+      });
+      return { ...state, cart: updatedProduct };
+    }
+
+    case "REMOVE_ITEM": {
+      let updatedCart = state.cart.filter((curItem) => curItem.id !== action.payload);
+      return { ...state, cart: updatedCart };
+    }
+
+    case "CLEAR_CART": {
+      return { ...state, cart: [] };
+    }
+
+    case "CART_TOTAL_ITEM": {
+      let updatedItemVal = (state.cart || []).reduce((initialVal, curElem) => {
+        let { amount } = curElem;
+        initialVal += amount;
+        return initialVal;
+      }, 0);
+      return { ...state, total_item: updatedItemVal };
+    }
+
+    case "CART_TOTAL_PRICE": {
+      let total_price = (state.cart || []).reduce((initialVal, curElem) => {
+        let { price, amount } = curElem;
+        initialVal += price * amount;
+        return initialVal;
+      }, 0);
+      return { ...state, total_price };
+    }
+
+    case "CART_ITEM_PRICE_TOTAL": {
+      let { total_item, total_price } = (state.cart || []).reduce(
+        (accum, curElem) => {
+          let { price, amount } = curElem;
+          accum.total_item += amount;
+          accum.total_price += price * amount;
+          return accum;
+        },
+        { total_item: 0, total_price: 0 }
+      );
+      return { ...state, total_item, total_price };
+    }
+
+    default:
+      return state;
   }
-}
-
-const initialState = {
-  // cart:[],
-  cart: getLocalCartData(),
-  total_item: 0,
-  total_amount: 0,
-  shipping_fee: 50000,
 };
 
-const CartProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
-
-  const addToCart = (id, color, amount, product) => {
-    dispatch({ type: "ADD_TO_CART", payload: { id, color, amount, product } });
-  };
-
-  const setDecrease = (id) => {
-    dispatch({ type: "SET_DECREMENT", payload: id });
-  };
-
-  const setIncrement = (id) => {
-    dispatch({ type: "SET_INCREMENT", payload: id });
-  };
-
-  const removeItem = (id) => {
-    dispatch({ type: "REMOVE_ITEM", payload: id });
-  };
-
-  const clearCart = () => {
-    dispatch({ type: "CLEAR_CART" });
-  };
-
-  // add the data in localStorage
-
-  useEffect(()=>{
-    dispatch({ type: "CART_ITEM_PRICE_TOTAL" });
-    localStorage.setItem("cartData",JSON.stringify(state.cart));
-  },[state.cart]);
-
-  return (
-    <CartContext.Provider value={{ ...state,
-      addToCart,
-      removeItem,
-      clearCart,
-      setDecrease,
-      setIncrement, }}>
-      {children}
-    </CartContext.Provider>
-  );
-};
-
-const useCartContext = () => {
-  return useContext(CartContext);
-};
-
-export { CartProvider, useCartContext };
+export default cartReducer;
