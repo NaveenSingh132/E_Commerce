@@ -1,5 +1,5 @@
 import './App.css';
-import {Routes,Route, HashRouter, BrowserRouter} from "react-router-dom";
+import {Routes,Route, BrowserRouter} from "react-router-dom";
 import Home from "./e_Commerce/Home";
 import About from "./e_Commerce/About";
 import Products from "./e_Commerce/Products";
@@ -49,7 +49,7 @@ function App() {
     <CartProvider>
     <ThemeProvider theme={theme}>
 
-    <HashRouter> 
+    <BrowserRouter> 
     <GlobalStyle/>
     <Header/>
     <Routes>
@@ -62,7 +62,7 @@ function App() {
       <Route path='/*' element={<ErrorPage/>}/>
     </Routes>
     <Footer/>
-    </HashRouter>
+    </BrowserRouter>
     
     </ThemeProvider>
     </CartProvider>

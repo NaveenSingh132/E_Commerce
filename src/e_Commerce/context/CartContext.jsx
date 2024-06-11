@@ -3,20 +3,20 @@ import reducer from "../reducer/CartReducer";
 
 const CartContext = createContext();
 
-const getLocalCartData = () =>{
-  let newCartData = localStorage.getItem("cartData");
-  if(newCartData === []){
+const getLocalCartData = () => {
+  try {
+    let newCartData = localStorage.getItem("cartData");
+    return newCartData ? JSON.parse(newCartData) : [];
+  } catch (error) {
+    console.error("Failed to parse local storage data:", error);
     return [];
-  } else{
-    return JSON.parse(newCartData);
   }
-}
+};
 
 const initialState = {
-  // cart:[],
   cart: getLocalCartData(),
-  total_item: "",
-  total_amount: "",
+  total_item: 0,
+  total_amount: 0,
   shipping_fee: 50000,
 };
 
@@ -43,20 +43,23 @@ const CartProvider = ({ children }) => {
     dispatch({ type: "CLEAR_CART" });
   };
 
-  // add the data in localStorage
-
-  useEffect(()=>{
+  // Add the data to localStorage whenever the cart state changes
+  useEffect(() => {
     dispatch({ type: "CART_ITEM_PRICE_TOTAL" });
-    localStorage.setItem("cartData",JSON.stringify(state.cart));
-  },[state.cart]);
+    localStorage.setItem("cartData", JSON.stringify(state.cart));
+  }, [state.cart]);
 
   return (
-    <CartContext.Provider value={{ ...state,
-      addToCart,
-      removeItem,
-      clearCart,
-      setDecrease,
-      setIncrement, }}>
+    <CartContext.Provider
+      value={{
+        ...state,
+        addToCart,
+        removeItem,
+        clearCart,
+        setDecrease,
+        setIncrement,
+      }}
+    >
       {children}
     </CartContext.Provider>
   );
