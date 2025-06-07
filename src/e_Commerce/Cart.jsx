@@ -33,15 +33,25 @@ const Cart = () => {
             return <CartItem key={curElem.id} {...curElem} />;
           })}
         </div>
+
         <hr />
+
         <div className="cart-two-button">
-          <NavLink to="/products">
-            <Button> continue Shopping </Button>
-          </NavLink>
-          <Button className="btn btn-clear" onClick={clearCart}>
-            clear cart
-          </Button>
-        </div>
+  <NavLink to="/products">
+    <Button>Continue Shopping</Button>
+  </NavLink>
+  {cart.length > 0 && (
+    <>
+      <NavLink to="/recommendations" className="btn btn-recommend">
+        View Recommendations
+      </NavLink>
+      <Button className="btn btn-clear" onClick={clearCart}>
+        Clear Cart
+      </Button>
+    </>
+  )}
+</div>
+
 
         {/* order total_amount */}
         <div className="order-total--amount">
@@ -86,6 +96,14 @@ const EmptyDiv = styled.div`
 
 const Wrapper = styled.section`
   padding: 9rem 0;
+
+  .btn-recommend {
+  background-color: purple;
+  color: white;
+  font-size: 1.6rem;
+  padding: 1rem 2rem;
+  margin: 0 1rem;
+}
 
   .grid-four-column {
     grid-template-columns: repeat(4, 1fr);

@@ -14,7 +14,7 @@ import Footer from './e_Commerce/eComComponents/Footer';
 import { AppProvider } from './e_Commerce/context/ProductContext';
 import { FilterContextProvider } from "./e_Commerce/context/FilterContext.jsx";
 import { CartProvider } from "./e_Commerce/context/CartContext.jsx";
-
+import Recommendations from "./e_Commerce/Recommendations"; 
 
 function App() {
 
@@ -59,6 +59,7 @@ function App() {
       <Route path='/contact' element={<Contacts/>}/>
       <Route path='/singleproduct/:id' element={<SingleProduct/>}/>
       <Route path='/cart' element={<Cart/>}/>
+      <Route path='/recommendations' element={<Recommendations/>}/>
       <Route path='/*' element={<ErrorPage/>}/>
     </Routes>
     <Footer/>
